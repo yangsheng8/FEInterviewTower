@@ -1,28 +1,18 @@
-# FEInterviewTower - Frontend Interview Preparation Guide
+# FEInterviewTower - 前端面试准备指南
 
-Welcome to "FEInterviewTower" - an innovative and comprehensive Astro theme designed to help frontend developers prepare for interviews.
+欢迎来到 "FEInterviewTower" - 一个整理前端面试题的博客，旨在帮助前端开发人员准备面试。
 
-Built with a focus on clean, modern aesthetics and leveraging the power of Astro and Tailwind, FEInterviewTower empowers you to craft a captivating blog that showcases your knowledge and expertise, helping you succeed in frontend interviews.
+FEInterviewTower 结合负荷认知理论和记忆规律，帮助你以无痛方式记忆每道前端面试题，让你在前端面试中脱颖而出。
 
-## Theme Features
 
-Leveraging the power of Astro and Tailwind CSS, FEInterviewTower offers:
 
-- Clean and modern design.
-- SEO-friendly.
-- Multiple Layouts.
-- Seamless Navigation.
-- Pre-built Sections.
-- Customizable Components.
-- Mobile-Responsiveness.
-
-## 🚀 Project Structure
+## 🚀 项目结构
 
 The project is built using Astro.js and Tailwind CSS. Here's a quick look at the project structure:
 
 Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+There's nothing special about `src/components/`, but that's where we like to put any Html/css/React/Vue components.
 
 Any static assets, like images, can be placed in the `public/` directory.
 
@@ -38,11 +28,3 @@ All commands are run from the root of the project, from a terminal:
 | `npm run preview`         | Preview your build locally, before deploying     |
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [Astro documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
