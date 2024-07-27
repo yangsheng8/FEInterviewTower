@@ -1,14 +1,12 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
-
-const metadata = {
-  title: 'FEInterviewsTower — Scale Your Interview Heights!',
-  ignoreTitleTemplate: true,
-};
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import ProjectList  from '../components/ProjectList.astro';
 ---
 
-<Layout metadata={metadata}>
-
-
-
+<Layout title="Positivus">
+	<main class="space-y-20">
+		<Hero/>
+		<ProjectList />
+	</main>
 </Layout>
