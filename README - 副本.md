@@ -1,8 +1,8 @@
-# FEInterviewTower - Frontend Interview Preparation Guide
+# FEInterviewTower - Digital Marketing Agency Landing Page
 
-Welcome to "FEInterviewTower" - an innovative and comprehensive Astro theme designed to help frontend developers prepare for interviews.
+Introducing "FEInterviewTower" - a stunning and versatile Astro theme designed for digital marketing agencies.
 
-Built with a focus on clean, modern aesthetics and leveraging the power of Astro and Tailwind, FEInterviewTower empowers you to craft a captivating blog that showcases your knowledge and expertise, helping you succeed in frontend interviews.
+Built with clean, modern aesthetics and leveraging the power of Astro and Tailwind, FEInterviewTower empowers you to craft a captivating website that showcases your agency's expertise and fosters trust with potential clients.
 
 ## Theme Features
 
