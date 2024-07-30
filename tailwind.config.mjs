@@ -11,7 +11,10 @@ export default {
 	  colors: {
 		black: "#000000",
 		white: "#FFFFFF",
-		gray: "#0D0C22",
+		gray: {
+			700: "#2d3748",
+			900: "#1a202c"
+		},
 		stone: "#231F20",
 		lime: "#eee0c6",
 		zinc: {

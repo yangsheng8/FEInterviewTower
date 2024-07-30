@@ -1,0 +1,44 @@
+---
+import Layout from "~/layouts/Layout.astro"
+import Container from "~/components/Container.astro"
+import ArticleCard from "~/components/ArticleCard.astro";
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from "astro:content";
+import { capitalize } from "~/utils/utils";
+import Pagination from "~/components/Pagination.astro";
+import { ARTICLES_PER_PAGE } from "~/constants";
+
+const { tag } = Astro.params;
+if(tag === undefined) {
+  throw new Error('Tag is required');
+}
+const currentPage: number | null = +Astro.url.searchParams.get('page')! || 1;
+const allBlogArticles: CollectionEntry<'blog'>[] = (await getCollection('blog'))
+  .sort((a:CollectionEntry<'blog'>, b:CollectionEntry<'blog'>) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const tagArticles = allBlogArticles.filter(article => article.data.tags.includes(tag));
+
+const totalPages: number = Math.ceil(tagArticles.length / ARTICLES_PER_PAGE);
+const articlesForPage: CollectionEntry<'blog'>[] = tagArticles.slice((currentPage - 1) * ARTICLES_PER_PAGE, currentPage * ARTICLES_PER_PAGE);
+const showDivider = articlesForPage.length > 1;
+---
+
+<Layout>
+    <Container>
+  <a href="javascript:history.back()" class="inline-block bg-gray-100 p-2 mb-6 hover:bg-orange-400 hover:text-white">返回上一层</a>
+<h1 class="text-2xl">#{capitalize(tag)}</h1>
+<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2 relative">
+  {articlesForPage.map(article => (
+    <ArticleCard article={article} />
+  ))}
+   {showDivider && <div class="absolute inset-y-0 left-1/2 w-0.5 bg-gray-900"></div>}
+</div>
+<Pagination 
+  currentPage={currentPage} 
+  totalPages={totalPages} 
+  disablePrevious={currentPage === 1} 
+  disableNext={currentPage === totalPages} 
+  tag={tag}
+/>
+</Container>
+</Layout>

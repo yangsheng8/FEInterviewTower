@@ -1,0 +1,15 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Container from "../components/Container.astro"
+import List from '~/components/List.astro'
+import { headerData  } from '~/constants'
+const list = headerData.links[0].links
+---
+
+<Layout title="FEInterviewTower">
+	<main class="space-y-20">
+        <Container>
+            <List title="第一层" list={list}/>
+        </Container>
+	</main>
+</Layout>

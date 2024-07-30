@@ -3,6 +3,7 @@ import "../styles/global.css";
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import { ViewTransitions } from 'astro:transitions';
+const { title = 'FEInterviewTower' } = Astro.props;
 ---
 
 <!doctype html>
@@ -13,11 +14,11 @@ import { ViewTransitions } from 'astro:transitions';
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>FEInterviewTower</title>
+    <title>{title}</title>
 	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
   <ViewTransitions />
   </head>
-  <body class="bg-white font-SpaceGrotesk">
+  <body class="bg-white font-SpaceGrotesk flex flex-col min-h-screen">
     <Navbar />
     <slot />
     <Footer/>

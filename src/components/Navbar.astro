@@ -1,50 +1,83 @@
 ---
-// Define your navigation links here
-const navLinks = [
-{ href: '/layer1', label: '第一层:核心' },
-  { href: '/layer2', label: '第二层:进阶(建设中)' },
-  { href: '/layer3', label: '第三层:高阶(建设中)' }
-];
-
-import Container from "./Container.astro"
+import { headerData } from '~/constants';
+import { trimSlash } from '~/utils/permalinks';
+const { links } = headerData;
+const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
+import { Icon } from 'astro-icon/components'
 ---
 
 <header class="mt-20">
-<nav class="w-full top-0 left-0 z-50 fixed bg-white">
-  <Container>
-    <div class="flex flex-wrap items-center justify-between mx-auto py-3">
-      <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+  <nav class="w-full top-0 left-0 z-50 fixed bg-white">
+    <div class="max-w-screen-xl w-full mx-auto px-6 md:px-14 xl:px-14">
+      <div class="flex flex-wrap items-center justify-between mx-auto py-3">
+        <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
           <img src="/Logo.svg" class="h-8" alt="Logo" /> FE-BLOG
-      </a>
-      <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden focus:outline-none focus:ring-2 " aria-controls="navbar-default" aria-expanded="false">
+        </a>
+        <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden focus:outline-none focus:ring-2 " aria-controls="navbar-default" aria-expanded="false">
           <span class="sr-only">Open main menu</span>
           <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
           </svg>
-      </button>
-      <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-        <ul class="font-medium flex justify-center p-4 md:p-0 mt-4 border rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white ">
-            {navLinks.map(link => (
-            <li>
-                <a href={link.href} class="block py-2 px-3 text-black rounded md:bg-transparent md:p-0">{link.label}</a>
-            </li>
-            ))}
+        </button>
+        <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+          <ul
+          class="flex flex-col md:flex-row md:self-center w-full md:w-auto text-xl md:text-[0.9375rem] tracking-[0.01rem] font-medium md:justify-center"
+        >
+          {
+            links.map(({ text, href, links }) => (
+              <li class={links?.length ? 'dropdown' : ''}>
+                {links?.length ? (
+                  <>
+                    <button type="button" class="hover:text-link dark:hover:text-white px-4 py-3 flex items-center">
+                      {text}{' '}
+                      <Icon name="tabler:chevron-down" class="w-3.5 h-3.5 ml-0.5 rtl:ml-0 rtl:mr-0.5 hidden md:inline" />
+                    </button>
+                    <ul class="dropdown-menu md:backdrop-blur-md dark:md:bg-dark rounded md:absolute pl-4 md:pl-0 md:hidden font-medium md:bg-white/90 md:min-w-[200px] drop-shadow-xl">
+                      {links.map(({ text: text2, href: href2 }) => (
+                        <li>
+                          <a
+                            class:list={[
+                              'first:rounded-t last:rounded-b md:hover:bg-gray-400/20  dark:hover:text-white dark:hover:bg-gray-400 py-2 px-5 block whitespace-no-wrap',
+                              { 'aw-link-active': href2 === currentPath },
+                            ]}
+                            href={href2}
+                          >
+                            {text2}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                ) : (
+                  <a
+                    class:list={[
+                      'hover:text-link dark:hover:text-white px-4 py-3 flex items-center',
+                      { 'aw-link-active': href === currentPath },
+                    ]}
+                    href={href}
+                  >
+                    {text}
+                  </a>
+                )}
+              </li>
+            ))
+          }
         </ul>
-      </div>
-      <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-        <a class="px-9 py-5 rounded-2xl border border-zinc-900 bg-white hover:bg-black text-black hover:text-white inline-flex" href="https://github.com/yangsheng8/FEInterviewTower" target="_blank"><h2 class="text-center text-xl font-normal leading-7">示例代码</h2>
-        </a>
+        </div>
+        <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+          <a class="px-9 py-5 rounded-2xl border border-zinc-900 bg-white hover:bg-black text-black hover:text-white inline-flex" href="https://github.com/yangsheng8/FEInterviewTower" target="_blank">
+            <h2 class="text-center text-xl font-normal leading-7">示例代码</h2>
+          </a>
+        </div>
       </div>
     </div>
-  </Container>
-</nav>
+  </nav>
 </header>
 
 <script is:inline>
 document.addEventListener('DOMContentLoaded', () => {
   const navbar = document.getElementById('navbar-default');
 
-  // Check if navbar exists before adding event listeners
   if (navbar) {
     const toggleButton = document.querySelector('[data-collapse-toggle="navbar-default"]');
     const navLinks = navbar.querySelectorAll('a');
@@ -60,5 +93,4 @@ document.addEventListener('DOMContentLoaded', () => {
     console.warn("Navbar element with ID 'navbar-default' not found. Navigation functionality might be affected.");
   }
 });
-
 </script>
